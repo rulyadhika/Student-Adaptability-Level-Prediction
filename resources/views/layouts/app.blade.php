@@ -159,6 +159,8 @@
         });
     </script> --}}
 
+    <script src="{{ asset('src/js/swalBtn.js') }}"></script>
+    <script src="{{ asset('src/js/swalDialog.js') }}"></script>
     <!-- clock -->
     <script src="{{ asset('src/js/clock.js') }}"></script>
 

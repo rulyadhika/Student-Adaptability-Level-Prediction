@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Livewire\Dashboard;
-use App\Http\Livewire\NaiveBayes\DataTraining;
+use App\Http\Livewire\DataTraining;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,6 +22,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', Dashboard::class);
 
-Route::group(['prefix'=>'naive-bayes'], function(){
-    Route::get('data-training', DataTraining::class)->name('naive-bayes.data-training');
-});
+Route::get('data-training', DataTraining::class)->name('naive-bayes.data-training');
