@@ -21,8 +21,8 @@
                         data-target="#importDataTrainingModal">Import Data</button>
                 </div>
                 <!-- Card Body -->
-                <div class="card-body listMasukanCardBody">
-                    <table id="tabel-data-training" class="display table " style="width:100%" wire:ignore.self>
+                <div class="card-body listMasukanCardBody" wire:ignore>
+                    <table id="tabel-data-training" class="display table " style="width:100%">
                         <thead class="thead-dark">
                             <tr>
                                 <th style="min-width:unset;">No</th>
@@ -71,8 +71,8 @@
                         data-target="#importDataTestingModal">Import Data</button>
                 </div>
                 <!-- Card Body -->
-                <div class="card-body listMasukanCardBody">
-                    <table id="tabel-data-testing" class="display table " style="width:100%" wire:ignore.self>
+                <div class="card-body listMasukanCardBody" wire:ignore>
+                    <table id="tabel-data-testing" class="display table " style="width:100%">
                         <thead class="thead-dark">
                             <tr>
                                 <th style="min-width:unset;">No</th>
@@ -116,6 +116,21 @@
                             @endforeach
                         </tbody>
                     </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header d-flex flex-row py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Hasil</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    Tingkat Akurasi : {{ $accuracyData }} %
                 </div>
             </div>
         </div>
