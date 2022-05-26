@@ -130,7 +130,17 @@
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                    Tingkat Akurasi : {{ $accuracyData }} %
+                    <div class="row font-weight-bold text-center">
+                        <div class="col-md-4">
+                            Accuracy : {{ $accuracy }} %
+                        </div>
+                        <div class="col-md-4">
+                            Precission : {{ $precission }} %
+                        </div>
+                        <div class="col-md-4">
+                            Recall : {{ $recall }} %
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

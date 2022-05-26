@@ -21,7 +21,9 @@ class DataTraining extends Component
     public $dataTrainingFile;
     public $dataTestingFile;
 
-    public $accuracyData = 0;
+    public $accuracy = 0;
+    public $precission = 0;
+    public $recall = 0;
 
     public function mount()
     {
@@ -33,49 +35,69 @@ class DataTraining extends Component
 
         $totalDataTesting = $this->dataTesting->count();
 
-        $lowLow = $dataTesting->where('tingkat_adaptabilitas','Low')->where('hasil_prediksi','Low')->count();
-        $lowMod = $dataTesting->where('tingkat_adaptabilitas','Low')->where('hasil_prediksi','Moderate')->count();
-        $lowHigh = $dataTesting->where('tingkat_adaptabilitas','Low')->where('hasil_prediksi','High')->count();
+        if($totalDataTesting > 0){
+            $lowLow = $dataTesting->where('tingkat_adaptabilitas', 'Low')->where('hasil_prediksi', 'Low')->count();
+            $lowMod = $dataTesting->where('tingkat_adaptabilitas', 'Low')->where('hasil_prediksi', 'Moderate')->count();
+            $lowHigh = $dataTesting->where('tingkat_adaptabilitas', 'Low')->where('hasil_prediksi', 'High')->count();
 
-        $modLow = $dataTesting->where('tingkat_adaptabilitas','Moderate')->where('hasil_prediksi','Low')->count();
-        $modMod = $dataTesting->where('tingkat_adaptabilitas','Moderate')->where('hasil_prediksi','Moderate')->count();
-        $modHigh = $dataTesting->where('tingkat_adaptabilitas','Moderate')->where('hasil_prediksi','High')->count();
+            $modLow = $dataTesting->where('tingkat_adaptabilitas', 'Moderate')->where('hasil_prediksi', 'Low')->count();
+            $modMod = $dataTesting->where('tingkat_adaptabilitas', 'Moderate')->where('hasil_prediksi', 'Moderate')->count();
+            $modHigh = $dataTesting->where('tingkat_adaptabilitas', 'Moderate')->where('hasil_prediksi', 'High')->count();
 
-        $highLow = $dataTesting->where('tingkat_adaptabilitas','High')->where('hasil_prediksi','Low')->count();
-        $highMod = $dataTesting->where('tingkat_adaptabilitas','High')->where('hasil_prediksi','Moderate')->count();
-        $highHigh = $dataTesting->where('tingkat_adaptabilitas','High')->where('hasil_prediksi','High')->count();
+            $highLow = $dataTesting->where('tingkat_adaptabilitas', 'High')->where('hasil_prediksi', 'Low')->count();
+            $highMod = $dataTesting->where('tingkat_adaptabilitas', 'High')->where('hasil_prediksi', 'Moderate')->count();
+            $highHigh = $dataTesting->where('tingkat_adaptabilitas', 'High')->where('hasil_prediksi', 'High')->count();
 
-        /*
-                            prediction
-            | fact       low moderate hight   |
-            | low                           |
-            | moderate                      |
-            | high                          |
-        */
+            /*
+                                prediction
+                | fact       low moderate hight   |
+                | low                           |
+                | moderate                      |
+                | high                          |
+            */
 
-        $confusionMatrix = 
-            [ 
-              [$lowLow, $lowMod, $lowHigh],
-              [$modLow, $modMod, $modHigh],
-              [$highLow, $highMod, $highHigh]
-            ]
-        ;
+            $confusionMatrix =
+                [
+                    [$lowLow, $lowMod, $lowHigh],
+                    [$modLow, $modMod, $modHigh],
+                    [$highLow, $highMod, $highHigh]
+                ];
 
-        // calculate accuracy
-        $accuracy = round(($lowLow + $modMod + $highHigh) / $totalDataTesting * 100,2);
+            // calculate accuracy
+            $accuracy = round(($lowLow + $modMod + $highHigh) / $totalDataTesting * 100, 2);
 
-        // calculate precission
-        // $precission = round( ($lowLow / ($lowLow + $lowMod + $lowHigh) + ($modMod / ($modLow + $modMod + $modHigh) + ($highHigh / ($highLow + $highMod + $highHigh) ) ) ) / 3 * 100,2);
-        
-        $precission = 0;
-        foreach ($confusionMatrix as $index => $matrix){
-            $precission += $matrix[$index] / array_sum($confusionMatrix[$index]);
+            // calculate precission
+            // $precission = round( ($lowLow / ($lowLow + $lowMod + $lowHigh) + ($modMod / ($modLow + $modMod + $modHigh) + ($highHigh / ($highLow + $highMod + $highHigh) ) ) ) / 3 * 100,2);
+
+            $precission = 0;
+            foreach ($confusionMatrix as $index => $matrix) {
+                $precission += $matrix[$index] / array_sum($confusionMatrix[$index]);
+            }
+
+            $precission = round($precission / 3 * 100, 2);
+
+            // calculate recall
+            // $recall = round( ($lowLow / ($lowLow + $modLow + $highLow) + ($modMod / ($lowMod + $modMod + $highMod) + ($highHigh / ($lowHigh + $modHigh + $highHigh) ) ) ) / 3 * 100,2);
+
+            $recall = 0;
+            foreach ($confusionMatrix as $index => $matrix) {
+                $tempRecall = 0;
+
+                for ($j = 0; $j < 3; $j++) {
+                    $tempRecall += $confusionMatrix[$j][$index];
+                }
+
+                $recall += $matrix[$index] / $tempRecall;
+            }
+
+            $recall = round($recall / 3 * 100, 2);
+
+            $this->fill([
+                'accuracy' => $accuracy,
+                'precission' => $precission,
+                'recall' => $recall
+            ]);
         }
-
-        $precission = round($precission/3*100,2);
-    
-        dd($accuracy, $precission);
-        
     }
 
     public function render()
