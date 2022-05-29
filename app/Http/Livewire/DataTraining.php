@@ -102,7 +102,7 @@ class DataTraining extends Component
 
     public function render()
     {
-        return view('livewire.naive-bayes.data-training');
+        return view('livewire.data-training');
     }
 
     public function saveDataTraining()

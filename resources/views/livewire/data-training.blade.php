@@ -263,7 +263,7 @@
                 text: response.message,
                 confirmAction : {
                     type : 'redirect',
-                    to : "{{ route('naive-bayes.data-training') }}",
+                    to : "{{ route('data-training') }}",
                 }
             });
 

@@ -25,12 +25,12 @@
     </div>
 
     <li class="nav-item ">
-        <a class="nav-link" href="{{ route('naive-bayes.data-training') }}">
+        <a class="nav-link" href="{{ route('data-training') }}">
             <i class="fa fa-times"></i>
             <span>Data Training</span></a>
-        <a class="nav-link" href="">
+        <a class="nav-link" href="{{ route('data-klasifikasi') }}">
             <i class="fa fa-times"></i>
-            <span>Cari Tahu</span></a>
+            <span>Klasifikasi Data</span></a>
     </li>
 
 
