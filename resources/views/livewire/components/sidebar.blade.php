@@ -1,7 +1,7 @@
 <ul class="navbar-nav bg-gray-900 sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
         <div class="sidebar-brand-text mx-3">Data Mining</div>
     </a>
 
@@ -10,7 +10,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item">
-        <a class="nav-link" href="">
+        <a class="nav-link" href="#">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
@@ -21,33 +21,23 @@
 
     <!-- Heading -->
     <div class="sidebar-heading">
-       cek
+        Data Management
     </div>
 
-    <li class="nav-item ">
-        <a class="nav-link" href="{{ route('data-training') }}">
-            <i class="fa fa-times"></i>
+    <li class="nav-item {{ request()->is('data-training*') ? 'active' : '' }}">
+        <a class="nav-link"
+            href="{{ route('data-training') }}">
+            <i class="fas fa-random"></i>
             <span>Data Training</span></a>
-        <a class="nav-link" href="{{ route('data-klasifikasi') }}">
-            <i class="fa fa-times"></i>
-            <span>Klasifikasi Data</span></a>
     </li>
 
-
-    <!-- Divider -->
-    <hr class="sidebar-divider d-none d-md-block">
-
-    <!-- Heading -->
-    <div class="sidebar-heading">
-        Lainnya
+    <div class="nav-item {{ request()->is('data-klasifikasi*') ? 'active' : '' }}">
+        <a class="nav-link"
+            href="{{ route('data-klasifikasi') }}">
+            <i class="fab fa-hubspot"></i>
+            <span>Klasifikasi Data</span></a>
     </div>
 
-    <li class="nav-item ">
-        <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">
-            <i class="fa fa-sign-out-alt"></i>
-            <span>Logout</span>
-        </a>
-    </li>
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">

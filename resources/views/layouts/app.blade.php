@@ -24,8 +24,6 @@
 
     <link rel="stylesheet" type="text/css" href="{{ asset('src/css/loader.css') }}">
 
-    <link rel="shortcut icon" href="{{ asset('src/images/logoKosonganOCH.png') }}" type="image/x-icon">
-
     @livewireStyles
 
     @stack('pageStyle')
