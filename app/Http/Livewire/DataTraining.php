@@ -130,7 +130,7 @@ class DataTraining extends Component
         foreach ($importDataTesting as $data) {
             $tempDataTesting->push(collect([
                 'jenis_kelamin' => $data[0],
-                'umur' => $data[1],
+                'usia' => $data[1],
                 'pendidikan' => $data[2],
                 'tipe_institusi' => $data[3],
                 'keadaan_keuangan' => $data[7],
@@ -151,14 +151,14 @@ class DataTraining extends Component
 
     private function calculateDataPrediction()
     {
-        $dataTraining = $this->dataTraining;
+        // $dataTraining = $this->dataTraining;
         $dataTesting = $this->dataTesting;
 
         // db data training
-        $totalDataTraining = $dataTraining->count();
-        $jmlDataTrainingRendah = $dataTraining->where('tingkat_adaptabilitas', 'Low')->count();
-        $jmlDataTrainingSedang = $dataTraining->where('tingkat_adaptabilitas', 'Moderate')->count();
-        $jmlDataTrainingTinggi = $dataTraining->where('tingkat_adaptabilitas', 'High')->count();
+        $totalDataTraining = ModelsDataTraining::count();
+        $jmlDataTrainingRendah = ModelsDataTraining::where('tingkat_adaptabilitas', 'Low')->count();
+        $jmlDataTrainingSedang = ModelsDataTraining::where('tingkat_adaptabilitas', 'Moderate')->count();
+        $jmlDataTrainingTinggi = ModelsDataTraining::where('tingkat_adaptabilitas', 'High')->count();
         $probDataTrainingRendah = $jmlDataTrainingRendah / $totalDataTraining;
         $probDataTrainingSedang = $jmlDataTrainingSedang / $totalDataTraining;
         $probDataTrainingTinggi = $jmlDataTrainingTinggi / $totalDataTraining;
@@ -167,65 +167,65 @@ class DataTraining extends Component
 
         //db data testing
         foreach ($dataTesting as $dataTest) {
-            $jmlJenisKelaminRendah = $dataTraining->where('jenis_kelamin', $dataTest->get('jenis_kelamin'))->where('tingkat_adaptabilitas', 'Low')->count();
-            $jmlJenisKelaminSedang = $dataTraining->where('jenis_kelamin', $dataTest->get('jenis_kelamin'))->where('tingkat_adaptabilitas', 'Moderate')->count();
-            $jmlJenisKelaminTinggi = $dataTraining->where('jenis_kelamin', $dataTest->get('jenis_kelamin'))->where('tingkat_adaptabilitas', 'High')->count();
+            $jmlJenisKelaminRendah = ModelsDataTraining::where('jenis_kelamin', $dataTest->get('jenis_kelamin'))->where('tingkat_adaptabilitas', 'Low')->count();
+            $jmlJenisKelaminSedang = ModelsDataTraining::where('jenis_kelamin', $dataTest->get('jenis_kelamin'))->where('tingkat_adaptabilitas', 'Moderate')->count();
+            $jmlJenisKelaminTinggi = ModelsDataTraining::where('jenis_kelamin', $dataTest->get('jenis_kelamin'))->where('tingkat_adaptabilitas', 'High')->count();
             $probJenisKelaminRendah = $jmlJenisKelaminRendah / $jmlDataTrainingRendah;
             $probJenisKelaminSedang = $jmlJenisKelaminSedang / $jmlDataTrainingSedang;
             $probJenisKelaminTinggi = $jmlJenisKelaminTinggi / $jmlDataTrainingTinggi;
 
-            $jmlUsiaRendah = $dataTraining->where('usia', $dataTest->get('usia'))->where('tingkat_adaptabilitas', 'Low')->count();
-            $jmlUsiaSedang = $dataTraining->where('usia', $dataTest->get('usia'))->where('tingkat_adaptabilitas', 'Moderate')->count();
-            $jmlUsiaTinggi = $dataTraining->where('usia', $dataTest->get('usia'))->where('tingkat_adaptabilitas', 'High')->count();
+            $jmlUsiaRendah = ModelsDataTraining::where('usia', $dataTest->get('usia'))->where('tingkat_adaptabilitas', 'Low')->count();
+            $jmlUsiaSedang = ModelsDataTraining::where('usia', $dataTest->get('usia'))->where('tingkat_adaptabilitas', 'Moderate')->count();
+            $jmlUsiaTinggi = ModelsDataTraining::where('usia', $dataTest->get('usia'))->where('tingkat_adaptabilitas', 'High')->count();
             $probUsiaRendah = $jmlUsiaRendah / $jmlDataTrainingRendah;
             $probUsiaSedang = $jmlUsiaSedang / $jmlDataTrainingSedang;
             $probUsiaTinggi = $jmlUsiaTinggi / $jmlDataTrainingTinggi;
 
-            $jmlPendidikanRendah = $dataTraining->where('pendidikan', $dataTest->get('pendidikan'))->where('tingkat_adaptabilitas', 'Low')->count();
-            $jmlPendidikanSedang = $dataTraining->where('pendidikan', $dataTest->get('pendidikan'))->where('tingkat_adaptabilitas', 'Moderate')->count();
-            $jmlPendidikanTinggi = $dataTraining->where('pendidikan', $dataTest->get('pendidikan'))->where('tingkat_adaptabilitas', 'High')->count();
+            $jmlPendidikanRendah = ModelsDataTraining::where('pendidikan', $dataTest->get('pendidikan'))->where('tingkat_adaptabilitas', 'Low')->count();
+            $jmlPendidikanSedang = ModelsDataTraining::where('pendidikan', $dataTest->get('pendidikan'))->where('tingkat_adaptabilitas', 'Moderate')->count();
+            $jmlPendidikanTinggi = ModelsDataTraining::where('pendidikan', $dataTest->get('pendidikan'))->where('tingkat_adaptabilitas', 'High')->count();
             $probPendidikanRendah = $jmlPendidikanRendah / $jmlDataTrainingRendah;
             $probPendidikanSedang = $jmlPendidikanSedang / $jmlDataTrainingSedang;
             $probPendidikanTinggi = $jmlPendidikanTinggi / $jmlDataTrainingTinggi;
 
-            $jmlTipeInstitusiRendah = $dataTraining->where('tipe_institusi', $dataTest->get('tipe_institusi'))->where('tingkat_adaptabilitas', 'Low')->count();
-            $jmlTipeInstitusiSedang = $dataTraining->where('tipe_institusi', $dataTest->get('tipe_institusi'))->where('tingkat_adaptabilitas', 'Moderate')->count();
-            $jmlTipeInstitusiTinggi = $dataTraining->where('tipe_institusi', $dataTest->get('tipe_institusi'))->where('tingkat_adaptabilitas', 'High')->count();
+            $jmlTipeInstitusiRendah = ModelsDataTraining::where('tipe_institusi', $dataTest->get('tipe_institusi'))->where('tingkat_adaptabilitas', 'Low')->count();
+            $jmlTipeInstitusiSedang = ModelsDataTraining::where('tipe_institusi', $dataTest->get('tipe_institusi'))->where('tingkat_adaptabilitas', 'Moderate')->count();
+            $jmlTipeInstitusiTinggi = ModelsDataTraining::where('tipe_institusi', $dataTest->get('tipe_institusi'))->where('tingkat_adaptabilitas', 'High')->count();
             $probTipeInstitusiRendah = $jmlTipeInstitusiRendah / $jmlDataTrainingRendah;
             $probTipeInstitusiSedang = $jmlTipeInstitusiSedang / $jmlDataTrainingSedang;
             $probTipeInstitusiTinggi = $jmlTipeInstitusiTinggi / $jmlDataTrainingTinggi;
 
-            $jmlKeuanganRendah = $dataTraining->where('keadaan_keuangan', $dataTest->get('keadaan_keuangan'))->where('tingkat_adaptabilitas', 'Low')->count();
-            $jmlKeuanganSedang = $dataTraining->where('keadaan_keuangan', $dataTest->get('keadaan_keuangan'))->where('tingkat_adaptabilitas', 'Moderate')->count();
-            $jmlKeuanganTinggi = $dataTraining->where('keadaan_keuangan', $dataTest->get('keadaan_keuangan'))->where('tingkat_adaptabilitas', 'High')->count();
+            $jmlKeuanganRendah = ModelsDataTraining::where('keadaan_keuangan', $dataTest->get('keadaan_keuangan'))->where('tingkat_adaptabilitas', 'Low')->count();
+            $jmlKeuanganSedang = ModelsDataTraining::where('keadaan_keuangan', $dataTest->get('keadaan_keuangan'))->where('tingkat_adaptabilitas', 'Moderate')->count();
+            $jmlKeuanganTinggi = ModelsDataTraining::where('keadaan_keuangan', $dataTest->get('keadaan_keuangan'))->where('tingkat_adaptabilitas', 'High')->count();
             $probKeuanganRendah = $jmlKeuanganRendah / $jmlDataTrainingRendah;
             $probKeuanganSedang = $jmlKeuanganSedang / $jmlDataTrainingSedang;
             $probKeuanganTinggi = $jmlKeuanganTinggi / $jmlDataTrainingTinggi;
 
-            $jmlTipeInternetRendah = $dataTraining->where('tipe_internet', $dataTest->get('tipe_internet'))->where('tingkat_adaptabilitas', 'Low')->count();
-            $jmlTipeInternetSedang = $dataTraining->where('tipe_internet', $dataTest->get('tipe_internet'))->where('tingkat_adaptabilitas', 'Moderate')->count();
-            $jmlTipeInternetTinggi = $dataTraining->where('tipe_internet', $dataTest->get('tipe_internet'))->where('tingkat_adaptabilitas', 'High')->count();
+            $jmlTipeInternetRendah = ModelsDataTraining::where('tipe_internet', $dataTest->get('tipe_internet'))->where('tingkat_adaptabilitas', 'Low')->count();
+            $jmlTipeInternetSedang = ModelsDataTraining::where('tipe_internet', $dataTest->get('tipe_internet'))->where('tingkat_adaptabilitas', 'Moderate')->count();
+            $jmlTipeInternetTinggi = ModelsDataTraining::where('tipe_internet', $dataTest->get('tipe_internet'))->where('tingkat_adaptabilitas', 'High')->count();
             $probTipeInternetRendah = $jmlTipeInternetRendah / $jmlDataTrainingRendah;
             $probTipeInternetSedang = $jmlTipeInternetSedang / $jmlDataTrainingSedang;
             $probTipeInternetTinggi = $jmlTipeInternetTinggi / $jmlDataTrainingTinggi;
 
-            $jmlTipeJaringanRendah = $dataTraining->where('tipe_jaringan', $dataTest->get('tipe_jaringan'))->where('tingkat_adaptabilitas', 'Low')->count();
-            $jmlTipeJaringanSedang = $dataTraining->where('tipe_jaringan', $dataTest->get('tipe_jaringan'))->where('tingkat_adaptabilitas', 'Moderate')->count();
-            $jmlTipeJaringanTinggi = $dataTraining->where('tipe_jaringan', $dataTest->get('tipe_jaringan'))->where('tingkat_adaptabilitas', 'High')->count();
+            $jmlTipeJaringanRendah = ModelsDataTraining::where('tipe_jaringan', $dataTest->get('tipe_jaringan'))->where('tingkat_adaptabilitas', 'Low')->count();
+            $jmlTipeJaringanSedang = ModelsDataTraining::where('tipe_jaringan', $dataTest->get('tipe_jaringan'))->where('tingkat_adaptabilitas', 'Moderate')->count();
+            $jmlTipeJaringanTinggi = ModelsDataTraining::where('tipe_jaringan', $dataTest->get('tipe_jaringan'))->where('tingkat_adaptabilitas', 'High')->count();
             $probTipeJaringanRendah = $jmlTipeJaringanRendah / $jmlDataTrainingRendah;
             $probTipeJaringanSedang = $jmlTipeJaringanSedang / $jmlDataTrainingSedang;
             $probTipeJaringanTinggi = $jmlTipeJaringanTinggi / $jmlDataTrainingTinggi;
 
-            $jmlDurasiKelasRendah = $dataTraining->where('durasi_kelas', $dataTest->get('durasi_kelas'))->where('tingkat_adaptabilitas', 'Low')->count();
-            $jmlDurasiKelasSedang = $dataTraining->where('durasi_kelas', $dataTest->get('durasi_kelas'))->where('tingkat_adaptabilitas', 'Moderate')->count();
-            $jmlDurasiKelasTinggi = $dataTraining->where('durasi_kelas', $dataTest->get('durasi_kelas'))->where('tingkat_adaptabilitas', 'High')->count();
+            $jmlDurasiKelasRendah = ModelsDataTraining::where('durasi_kelas', $dataTest->get('durasi_kelas'))->where('tingkat_adaptabilitas', 'Low')->count();
+            $jmlDurasiKelasSedang = ModelsDataTraining::where('durasi_kelas', $dataTest->get('durasi_kelas'))->where('tingkat_adaptabilitas', 'Moderate')->count();
+            $jmlDurasiKelasTinggi = ModelsDataTraining::where('durasi_kelas', $dataTest->get('durasi_kelas'))->where('tingkat_adaptabilitas', 'High')->count();
             $probDurasiKelasRendah = $jmlDurasiKelasRendah / $jmlDataTrainingRendah;
             $probDurasiKelasSedang = $jmlDurasiKelasSedang / $jmlDataTrainingSedang;
             $probDurasiKelasTinggi = $jmlDurasiKelasTinggi / $jmlDataTrainingTinggi;
 
-            $jmlPerangkatRendah = $dataTraining->where('perangkat', $dataTest->get('perangkat'))->where('tingkat_adaptabilitas', 'Low')->count();
-            $jmlPerangkatSedang = $dataTraining->where('perangkat', $dataTest->get('perangkat'))->where('tingkat_adaptabilitas', 'Moderate')->count();
-            $jmlPerangkatTinggi = $dataTraining->where('perangkat', $dataTest->get('perangkat'))->where('tingkat_adaptabilitas', 'High')->count();
+            $jmlPerangkatRendah = ModelsDataTraining::where('perangkat', $dataTest->get('perangkat'))->where('tingkat_adaptabilitas', 'Low')->count();
+            $jmlPerangkatSedang = ModelsDataTraining::where('perangkat', $dataTest->get('perangkat'))->where('tingkat_adaptabilitas', 'Moderate')->count();
+            $jmlPerangkatTinggi = ModelsDataTraining::where('perangkat', $dataTest->get('perangkat'))->where('tingkat_adaptabilitas', 'High')->count();
             $probPerangkatRendah = $jmlPerangkatRendah / $jmlDataTrainingRendah;
             $probPerangkatSedang = $jmlPerangkatSedang / $jmlDataTrainingSedang;
             $probPerangkatTinggi = $jmlPerangkatTinggi / $jmlDataTrainingTinggi;

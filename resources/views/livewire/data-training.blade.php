@@ -27,7 +27,7 @@
                             <tr>
                                 <th style="min-width:unset;">No</th>
                                 <th>Jenis Kelamin</th>
-                                <th>Umur</th>
+                                <th>Usia</th>
                                 <th>Pendidikan</th>
                                 <th>Tipe Institusi</th>
                                 <th style="min-width:120px;">Keuangan</th>
@@ -43,7 +43,7 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $data->jenis_kelamin }}</td>
-                                    <td>{{ $data->umur }}</td>
+                                    <td>{{ $data->usia }}</td>
                                     <td>{{ $data->pendidikan }}</td>
                                     <td>{{ $data->tipe_institusi }}</td>
                                     <td>{{ $data->keadaan_keuangan }}</td>
@@ -77,7 +77,7 @@
                             <tr>
                                 <th style="min-width:unset;">No</th>
                                 <th>Jenis Kelamin</th>
-                                <th>Umur</th>
+                                <th>Usia</th>
                                 <th>Pendidikan</th>
                                 <th>Tipe Institusi</th>
                                 <th style="min-width:120px;">Keuangan</th>
@@ -98,7 +98,7 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $data->jenis_kelamin }}</td>
-                                    <td>{{ $data->umur }}</td>
+                                    <td>{{ $data->usia }}</td>
                                     <td>{{ $data->pendidikan }}</td>
                                     <td>{{ $data->tipe_institusi }}</td>
                                     <td>{{ $data->keadaan_keuangan }}</td>

@@ -15,16 +15,16 @@ return new class extends Migration
     {
         Schema::create('data_testings', function (Blueprint $table) {
             $table->id();
-            $table->string('jenis_kelamin');
-            $table->string('umur');
-            $table->string('pendidikan');
-            $table->string('tipe_institusi');
-            $table->string('keadaan_keuangan');
-            $table->string('tipe_internet');
-            $table->string('tipe_jaringan');
-            $table->string('durasi_kelas');
-            $table->string('perangkat');
-            $table->string('tingkat_adaptabilitas');
+            $table->enum('jenis_kelamin', ['Boy', 'Girl']);
+            $table->enum('usia', ['1-5', '6-10', '11-15', '16-20', '21-25', '26-30']);
+            $table->enum('pendidikan', ['University', 'College', 'School']);
+            $table->enum('tipe_institusi', ['Government', 'Non Government']);
+            $table->enum('keadaan_keuangan', ['Mid', 'Poor', 'Rich']);
+            $table->enum('tipe_internet', ['Wifi', 'Mobile Data']);
+            $table->enum('tipe_jaringan', ['2G', '3G', '4G']);
+            $table->enum('durasi_kelas', ['1-3', '3-6']);
+            $table->enum('perangkat', ['Computer', 'Tab', 'Mobile']);
+            $table->enum('tingkat_adaptabilitas', ['Low', 'Moderate', 'High']);
             $table->string('nilai_prob_rendah')->nullable();
             $table->string('nilai_prob_sedang')->nullable();
             $table->string('nilai_prob_tinggi')->nullable();

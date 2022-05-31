@@ -16,7 +16,7 @@ class DataTestingImport implements ToCollection, WithStartRow
         {
             DataTesting::create([
                 'jenis_kelamin' => $row['0'],
-                'umur' => $row['1'],
+                'usia' => $row['1'],
                 'pendidikan' => $row['2'],
                 'tipe_institusi' => $row['3'],
                 'keadaan_keuangan' => $row['7'],
