@@ -153,18 +153,19 @@
         });
     </script>
 
-    {{-- <script>
-        Livewire.on('failedAction', (response) => {
-            dispatchErrorDialog(response);
-        });
-    </script> --}}
-
     <script src="{{ asset('src/js/swalBtn.js') }}"></script>
     <script src="{{ asset('src/js/swalDialog.js') }}"></script>
     <!-- clock -->
     <script src="{{ asset('src/js/clock.js') }}"></script>
 
     @livewireScripts
+
+    <script>
+        Livewire.on('failedAction', (response) => {
+            dispatchErrorDialog(response);
+        });
+    </script>
+
 
     @stack('pageScript')
 

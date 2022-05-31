@@ -107,9 +107,9 @@
                                     <td>{{ $data->durasi_kelas }}</td>
                                     <td>{{ $data->perangkat }}</td>
                                     <td>{{ $data->tingkat_adaptabilitas }}</td>
-                                    <td>{{ $data->nilai_prob_rendah }}</td>
-                                    <td>{{ $data->nilai_prob_sedang }}</td>
-                                    <td>{{ $data->nilai_prob_tinggi }}</td>
+                                    <td style="min-width:200px;">{{ $data->nilai_prob_rendah }}</td>
+                                    <td style="min-width:200px;">{{ $data->nilai_prob_sedang }}</td>
+                                    <td style="min-width:200px;">{{ $data->nilai_prob_tinggi }}</td>
                                     <td>{{ $data->hasil_prediksi }}</td>
                                     <td>{{ $data->prediksi_valid }}</td>
                                 </tr>

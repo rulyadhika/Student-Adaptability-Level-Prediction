@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('nama');
             $table->string('asal_sekolah');
             $table->string('usia');
+            $table->string('jenis_kelamin');
             $table->string('pendidikan');
             $table->string('tipe_institusi');
             $table->string('keadaan_keuangan');
@@ -28,7 +29,7 @@ return new class extends Migration
             $table->string('nilai_prob_rendah');
             $table->string('nilai_prob_sedang');
             $table->string('nilai_prob_tinggi');
-            $table->string('tingkat_adaptabilitas');
+            $table->string('hasil_prediksi');
             $table->timestamps();
         });
     }
