@@ -22,6 +22,8 @@ class DataTraining extends Component
     public $dataTrainingFile;
     public $dataTestingFile;
 
+    public $addToDataTraining;
+
     public $accuracy = 0;
     public $precission = 0;
     public $recall = 0;
@@ -125,6 +127,10 @@ class DataTraining extends Component
             'dataTestingFile' => 'required|file'
         ]);
 
+        if(ModelsDataTraining::count() == 0){
+            return $this->emit('failedAction', ['message' => 'Silahkan tambahkan data training terlebih dahulu!']);
+        }
+
         $importDataTesting = Excel::toCollection(new DataTestingImport, $this->dataTestingFile)[0];
 
         $this->dataTesting = $importDataTesting;
@@ -139,7 +145,12 @@ class DataTraining extends Component
         $naiveBayes = new NaiveBayesCalculation($this->dataTesting, true);
         $calculatedTestingData = $naiveBayes->calculate();
 
+        DataTesting::truncate();
         DataTesting::insert($calculatedTestingData->toArray());
+
+        if($this->addToDataTraining){
+            ModelsDataTraining::insert($this->dataTesting->toArray());
+        }
 
         $this->dataTesting = collect();
     }

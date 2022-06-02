@@ -201,11 +201,18 @@
                         </div>
                     </div>
                     <small>*Ukuran file maksimal 1MB. Ekstensi yang diperbolehkan csv. </small>
+                    <small class="d-block text-danger" style="line-height: 16px;">*Jika anda sudah pernah menambahkan data testing, maka data testing tersebut akan otomatis digantikan dengan data testing yang baru</small>
                     @error('dataTestingFile')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
                     @enderror
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" id="addToDataTraining" wire:model.defer="addToDataTraining">
+                        <label class="form-check-label" for="addToDataTraining">
+                          <small>Tambah Data Ini Ke Data Training</small>
+                        </label>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-sm btn-primary" wire:click="saveDataTesting">Import</button>
@@ -261,9 +268,9 @@
             dispatchSuccessDialog({
                 title: "Berhasil!",
                 text: response.message,
-                confirmAction : {
-                    type : 'redirect',
-                    to : "{{ route('data-training') }}",
+                confirmAction: {
+                    type: 'redirect',
+                    to: "{{ route('data-training') }}",
                 }
             });
 
