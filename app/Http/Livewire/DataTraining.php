@@ -37,17 +37,17 @@ class DataTraining extends Component
         $totalDataTesting = $this->dataTesting->count();
 
         if($totalDataTesting > 0){
-            $lowLow = $dataTesting->where('tingkat_adaptabilitas', 'Low')->where('hasil_prediksi', 'Low')->count();
-            $lowMod = $dataTesting->where('tingkat_adaptabilitas', 'Low')->where('hasil_prediksi', 'Moderate')->count();
-            $lowHigh = $dataTesting->where('tingkat_adaptabilitas', 'Low')->where('hasil_prediksi', 'High')->count();
+            $lowLow = $dataTesting->where('tingkat_adaptabilitas', 'Rendah')->where('hasil_prediksi', 'Rendah')->count();
+            $lowMod = $dataTesting->where('tingkat_adaptabilitas', 'Rendah')->where('hasil_prediksi', 'Sedang')->count();
+            $lowHigh = $dataTesting->where('tingkat_adaptabilitas', 'Rendah')->where('hasil_prediksi', 'Tinggi')->count();
 
-            $modLow = $dataTesting->where('tingkat_adaptabilitas', 'Moderate')->where('hasil_prediksi', 'Low')->count();
-            $modMod = $dataTesting->where('tingkat_adaptabilitas', 'Moderate')->where('hasil_prediksi', 'Moderate')->count();
-            $modHigh = $dataTesting->where('tingkat_adaptabilitas', 'Moderate')->where('hasil_prediksi', 'High')->count();
+            $modLow = $dataTesting->where('tingkat_adaptabilitas', 'Sedang')->where('hasil_prediksi', 'Rendah')->count();
+            $modMod = $dataTesting->where('tingkat_adaptabilitas', 'Sedang')->where('hasil_prediksi', 'Sedang')->count();
+            $modHigh = $dataTesting->where('tingkat_adaptabilitas', 'Sedang')->where('hasil_prediksi', 'Tinggi')->count();
 
-            $highLow = $dataTesting->where('tingkat_adaptabilitas', 'High')->where('hasil_prediksi', 'Low')->count();
-            $highMod = $dataTesting->where('tingkat_adaptabilitas', 'High')->where('hasil_prediksi', 'Moderate')->count();
-            $highHigh = $dataTesting->where('tingkat_adaptabilitas', 'High')->where('hasil_prediksi', 'High')->count();
+            $highLow = $dataTesting->where('tingkat_adaptabilitas', 'Tinggi')->where('hasil_prediksi', 'Rendah')->count();
+            $highMod = $dataTesting->where('tingkat_adaptabilitas', 'Tinggi')->where('hasil_prediksi', 'Sedang')->count();
+            $highHigh = $dataTesting->where('tingkat_adaptabilitas', 'Tinggi')->where('hasil_prediksi', 'Tinggi')->count();
 
             /*
                                 prediction
@@ -58,11 +58,11 @@ class DataTraining extends Component
             */
 
             $confusionMatrix =
-                [
-                    [$lowLow, $lowMod, $lowHigh],
-                    [$modLow, $modMod, $modHigh],
-                    [$highLow, $highMod, $highHigh]
-                ];
+            [
+                [$lowLow, $lowMod, $lowHigh],
+                [$modLow, $modMod, $modHigh],
+                [$highLow, $highMod, $highHigh]
+            ];
 
             // calculate accuracy
             $accuracy = round(($lowLow + $modMod + $highHigh) / $totalDataTesting * 100, 2);
@@ -109,7 +109,7 @@ class DataTraining extends Component
     public function saveDataTraining()
     {
         $this->validate([
-            'dataTrainingFile' => 'required|mimes:csv'
+            'dataTrainingFile' => 'required|file'
         ]);
 
         Excel::import(new DataTrainingImport, $this->dataTrainingFile);
@@ -122,28 +122,12 @@ class DataTraining extends Component
     public function saveDataTesting()
     {
         $this->validate([
-            'dataTestingFile' => 'required|mimes:csv'
+            'dataTestingFile' => 'required|file'
         ]);
 
         $importDataTesting = Excel::toCollection(new DataTestingImport, $this->dataTestingFile)[0];
-        $tempDataTesting = collect();
 
-        foreach ($importDataTesting as $data) {
-            $tempDataTesting->push(collect([
-                'jenis_kelamin' => $data[0],
-                'usia' => $data[1],
-                'pendidikan' => $data[2],
-                'tipe_institusi' => $data[3],
-                'keadaan_keuangan' => $data[7],
-                'tipe_internet' => $data[8],
-                'tipe_jaringan' => $data[9],
-                'durasi_kelas' => $data[10],
-                'perangkat' => $data[12],
-                'tingkat_adaptabilitas' => $data[13]
-            ]));
-        }
-
-        $this->dataTesting = $tempDataTesting;
+        $this->dataTesting = $importDataTesting;
 
         $this->calculateDataPrediction();
 

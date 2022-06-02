@@ -111,8 +111,8 @@
                             <select class="form-control @error('jenis_kelamin') is-invalid @enderror" id="jenis_kelamin"
                                 wire:model.defer="jenis_kelamin">
                                 <option>-- Pilih Jenis Kelamin --</option>
-                                <option value="Boy">Laki - laki</option>
-                                <option value="Girl">Perempuan</option>
+                                <option value="Laki - laki">Laki - laki</option>
+                                <option value="Perempuan">Perempuan</option>
                             </select>
                             @error('jenis_kelamin')
                                 <div class="invalid-feedback">
@@ -145,8 +145,8 @@
                             <select class="form-control @error('pendidikan') is-invalid @enderror" id="pendidikan"
                                 wire:model.defer="pendidikan">
                                 <option>-- Pilih Pendidikan --</option>
-                                <option value="School">Sekolah (SD,SMP,SMA)</option>
-                                <option value="University">Universitas</option>
+                                <option value="Sekolah (SD,SMP,SMA)">Sekolah (SD,SMP,SMA)</option>
+                                <option value="Perguruan Tinggi">Perguruan Tinggi</option>
                             </select>
                             @error('pendidikan')
                                 <div class="invalid-feedback">
@@ -159,8 +159,8 @@
                             <select class="form-control @error('tipe_institusi') is-invalid @enderror" id="tipe_institusi"
                                 wire:model.defer="tipe_institusi">
                                 <option>-- Pilih Tipe Insitusi --</option>
-                                <option value="Government">Pemerintah</option>
-                                <option value="Non Government">Non Pemerintah</option>
+                                <option value="Negeri">Negeri</option>
+                                <option value="Swasta">Swasta</option>
                             </select>
                             @error('tipe_institusi')
                                 <div class="invalid-feedback">
@@ -176,7 +176,7 @@
                                 wire:model.defer="tipe_internet">
                                 <option>-- Pilih Tipe Internet --</option>
                                 <option value="Wifi">Wifi</option>
-                                <option value="Mobile Data">Paket Data</option>
+                                <option value="Paket Data">Paket Data</option>
                             </select>
                             @error('tipe_internet')
                                 <div class="invalid-feedback">
@@ -220,9 +220,9 @@
                             <select class="form-control @error('perangkat') is-invalid @enderror" id="perangkat"
                                 wire:model.defer="perangkat">
                                 <option>-- Pilih Perangkat --</option>
-                                <option value="Mobile">Smartphone</option>
-                                <option value="Tab">Tablet</option>
-                                <option value="Computer">Laptop/Komputer</option>
+                                <option value="Smartphone">Smartphone</option>
+                                <option value="Tablet">Tablet</option>
+                                <option value="Komputer">Laptop/Komputer</option>
                             </select>
                             @error('perangkat')
                                 <div class="invalid-feedback">
@@ -238,9 +238,9 @@
                         <select class="form-control @error('keadaan_keuangan') is-invalid @enderror" id="keadaan_keuangan"
                             wire:model.defer="keadaan_keuangan">
                             <option>-- Pilih Keadaan Keuangan --</option>
-                            <option value="Poor">Mengenah Kebawah</option>
-                            <option value="Mid">Menengah Keatas</option>
-                            <option value="Rich">Mampu</option>
+                            <option value="Menengah Kebawah">Menengah Kebawah</option>
+                            <option value="Menengah Keatas">Menengah Keatas</option>
+                            <option value="Mampu">Mampu</option>
                         </select>
                         @error('keadaan_keuangan')
                             <div class="invalid-feedback">

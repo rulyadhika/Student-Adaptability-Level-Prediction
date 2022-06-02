@@ -6,8 +6,9 @@ use App\Models\DataTesting;
 use Maatwebsite\Excel\Concerns\WithStartRow;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Illuminate\Support\Collection;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class DataTestingImport implements ToCollection, WithStartRow
+class DataTestingImport implements ToCollection, WithStartRow, WithHeadingRow
 {
 
     public function collection(Collection $rows)
@@ -15,16 +16,16 @@ class DataTestingImport implements ToCollection, WithStartRow
         foreach ($rows as $row) 
         {
             DataTesting::create([
-                'jenis_kelamin' => $row['0'],
-                'usia' => $row['1'],
-                'pendidikan' => $row['2'],
-                'tipe_institusi' => $row['3'],
-                'keadaan_keuangan' => $row['7'],
-                'tipe_internet' => $row['8'],
-                'tipe_jaringan' => $row['9'],
-                'durasi_kelas' => $row['10'],
-                'perangkat' => $row['12'],
-                'tingkat_adaptabilitas' => $row['13']
+                'jenis_kelamin' => $row['jenis_kelamin'],
+                'usia' => $row['usia'],
+                'pendidikan' => $row['pendidikan'],
+                'tipe_institusi' => $row['tipe_institusi'],
+                'keadaan_keuangan' => $row['keadaan_keuangan'],
+                'tipe_internet' => $row['tipe_internet'],
+                'tipe_jaringan' => $row['tipe_jaringan'],
+                'durasi_kelas' => $row['durasi_kelas'],
+                'perangkat' => $row['perangkat'],
+                'tingkat_adaptabilitas' => $row['tingkat_adaptabilitas']
             ]);
         }
     }
