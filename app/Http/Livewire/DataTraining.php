@@ -23,6 +23,7 @@ class DataTraining extends Component
     public $dataTestingFile;
 
     public $addToDataTraining;
+    public $deleteDataTraining;
 
     public $accuracy = 0;
     public $precission = 0;
@@ -38,7 +39,7 @@ class DataTraining extends Component
 
         $totalDataTesting = $this->dataTesting->count();
 
-        if($totalDataTesting > 0){
+        if ($totalDataTesting > 0) {
             $lowLow = $dataTesting->where('tingkat_adaptabilitas', 'Rendah')->where('hasil_prediksi', 'Rendah')->count();
             $lowMod = $dataTesting->where('tingkat_adaptabilitas', 'Rendah')->where('hasil_prediksi', 'Sedang')->count();
             $lowHigh = $dataTesting->where('tingkat_adaptabilitas', 'Rendah')->where('hasil_prediksi', 'Tinggi')->count();
@@ -60,11 +61,11 @@ class DataTraining extends Component
             */
 
             $confusionMatrix =
-            [
-                [$lowLow, $lowMod, $lowHigh],
-                [$modLow, $modMod, $modHigh],
-                [$highLow, $highMod, $highHigh]
-            ];
+                [
+                    [$lowLow, $lowMod, $lowHigh],
+                    [$modLow, $modMod, $modHigh],
+                    [$highLow, $highMod, $highHigh]
+                ];
 
             // calculate accuracy
             $accuracy = round(($lowLow + $modMod + $highHigh) / $totalDataTesting * 100, 2);
@@ -114,6 +115,11 @@ class DataTraining extends Component
             'dataTrainingFile' => 'required|file'
         ]);
 
+        if ($this->deleteDataTraining) {
+            ModelsDataTraining::truncate();
+            DataTesting::truncate();
+        }
+
         Excel::import(new DataTrainingImport, $this->dataTrainingFile);
 
         $this->dataTraining = collect();
@@ -127,7 +133,7 @@ class DataTraining extends Component
             'dataTestingFile' => 'required|file'
         ]);
 
-        if(ModelsDataTraining::count() == 0){
+        if (ModelsDataTraining::count() == 0) {
             return $this->emit('failedAction', ['message' => 'Silahkan tambahkan data training terlebih dahulu!']);
         }
 
@@ -148,7 +154,7 @@ class DataTraining extends Component
         DataTesting::truncate();
         DataTesting::insert($calculatedTestingData->toArray());
 
-        if($this->addToDataTraining){
+        if ($this->addToDataTraining) {
             ModelsDataTraining::insert($this->dataTesting->toArray());
         }
 

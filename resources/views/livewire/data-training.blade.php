@@ -172,6 +172,13 @@
                             {{ $message }}
                         </div>
                     @enderror
+ 		    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" id="deleteDataTraining" wire:model.defer="deleteDataTraining">
+                        <label class="form-check-label" for="deleteDataTraining">
+                          <small class="d-block">Hapus Semua Data Training dan Gantikan Dengan Yang Baru</small>
+			  <small class="d-block text-danger">Semua data testing juga akan otomatis terhapus</small>
+                        </label>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-sm btn-primary" wire:click="saveDataTraining">Import</button>

@@ -17,12 +17,12 @@ return new class extends Migration
             $table->id();
             $table->enum('jenis_kelamin', ['Laki - laki', 'Perempuan']);
             $table->enum('usia', ['1-5', '6-10', '11-15', '16-20', '21-25', '26-30']);
-            $table->enum('pendidikan', ['Perguruan Tinggi', 'Sekolah (SD,SMP,SMA)']);
+            $table->enum('pendidikan', ['Perguruan Tinggi', 'Sekolah (SD,SMP,SMA)', 'College']);
             $table->enum('tipe_institusi', ['Negeri', 'Swasta']);
             $table->enum('keadaan_keuangan', ['Menengah Keatas', 'Menengah Kebawah', 'Mampu']);
             $table->enum('tipe_internet', ['Wifi', 'Paket Data']);
             $table->enum('tipe_jaringan', ['2G', '3G', '4G']);
-            $table->enum('durasi_kelas', ['1-3', '3-6']);
+            $table->string('durasi_kelas');
             $table->enum('perangkat', ['Komputer', 'Tablet', 'Smartphone']);
             $table->enum('tingkat_adaptabilitas', ['Rendah', 'Sedang', 'Tinggi']);
             $table->timestamps();
